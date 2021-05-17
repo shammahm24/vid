@@ -1,7 +1,7 @@
 {
-  "name": "livestream-server",
+  "name": "VICO",
   "version": "0.0.1",
-  "description": "A conference call implementation using WebRTC, Socket.io and Node.js.",
+  "description": "Video conference application with WebRTC",
   "main": "src/app.js",
   "dependencies": {
     "express": "^4.17.1",
@@ -9,25 +9,23 @@
     "socket.io": "^2.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.7"
   },
   "scripts": {
     "watch": "nodemon --watch \"src/\" --exec \"node src/app.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node ./src/app.js"
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amirsanni/livestream-server.git"
+    "url": "https://github.com/shammahm24/vid.git"
   },
   "keywords": [
-    "LiveStream",
-    "Server"
+    "Webrtc",
+    "VideoConference"
   ],
-  "author": "Amir Sanni <amirsanni@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/amirsanni/livestream-server/issues"
-  },
-  "homepage": "https://github.com/amirsanni/livestream-server#readme"
+  "author": "Shammah Matasva <tanyaradzwam24@gmail.com>",
+  "license": "*",
+  "homepage": "https://vicomeet.com"
 }

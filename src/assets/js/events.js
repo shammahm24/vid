@@ -53,10 +53,10 @@ window.addEventListener( 'load', () => {
     document.getElementById( 'create-room' ).addEventListener( 'click', ( e ) => {
         e.preventDefault();
 
-        let roomName = document.querySelector( '#room-name' ).value;
-        let yourName = document.querySelector( '#your-name' ).value;
-
-        if ( roomName && yourName ) {
+        //let roomName = document.querySelector( '#room-name' ).value;
+        //let yourName = document.querySelector( '#your-name' ).value;
+        let yourName="Host";
+        if (yourName ) {
             //remove error message, if any
             document.querySelector( '#err-msg' ).innerHTML = "";
 
@@ -64,11 +64,31 @@ window.addEventListener( 'load', () => {
             sessionStorage.setItem( 'username', yourName );
 
             //create room link
-            let roomLink = `${ location.origin }?room=${ roomName.trim().replace( ' ', '_' ) }_${ helpers.generateRandomString() }`;
+            let roomLink = `${ location.origin }?${ helpers.generateRandomString() }`;
 
             //show message with link to room
-            document.querySelector( '#room-created' ).innerHTML = `Room successfully created. Click <a href='${ roomLink }'>here</a> to enter room. 
-                Share the room link with your partners.`;
+            //document.querySelector( '#room-created' ).innerHTML = `Room successfully created. Click <a href='${ roomLink }'>here</a> to enter room. 
+              //  Share the room link with your partners.`;
+	    window.location.href = `${roomLink}`;
+
+           /*
+                   let name = document.querySelector( '#username' ).value;
+
+        if ( name ) {
+            //remove error message, if any
+            document.querySelector( '#err-msg-username' ).innerHTML = "";
+
+            //save the user's name in sessionStorage
+            sessionStorage.setItem( 'username', name );
+
+            //reload room
+            location.reload();
+        }
+
+        else {
+            document.querySelector( '#err-msg-username' ).innerHTML = "Please input your name";
+        }
+		*/
 
             //empty the values
             document.querySelector( '#room-name' ).value = '';

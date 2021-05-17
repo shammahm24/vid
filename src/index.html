@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multi-User Video Call</title>
+        <title>VICO</title>
 
         <meta content="width=device-width, initial-scale=1" name="viewport" />
 
@@ -41,7 +41,7 @@
         
         
         <nav class="navbar fixed-top bg-info rounded-0 d-print-none">
-            <div class="text-white">Video Call</div>
+            <div class="text-white">VICO</div>
 
             <div class="pull-right room-comm" hidden>
                 <button class="btn btn-sm rounded-0 btn-no-effect" id='toggle-video' title="Hide Video">
@@ -69,7 +69,7 @@
                 </button>
             </div>
         </nav>
-
+<!--
         <div class="container-fluid" id='room-create' hidden>
             <div class="row">
                 <div class="col-12 h2 mt-5 text-center">Create Room</div>
@@ -97,9 +97,49 @@
                 <div class="col-12 col-md-4 offset-md-4 mb-3" id='room-created'></div>
             </div>
         </div>
+    -->
+    <div style="height:400px; width:100%; clear:both;"></div>
+    <div class="row">
+        <div
+          class="col-md-6 mb-5 d-flex justify-content-center align-items-center start_meet"
+        >
+          
+          <div class="row">
+            <div class="col-12">
+              <a class="btn btn-success btn-lg" href="?room=1_3605215852 "
+                >Start instant meeting</a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-6 mb-5 d-flex justify-content-start align-items-center join_room"
+        >
+          
+
+          <div class="row d-flex justify-content-center">
+            <div class="col-7">
+              <input
+                type="text"
+                class="form-control"
+                id="roomIdInput"
+                placeholder="Enter room id"
+              />
+            </div>
+            <div class="col-5">
+              <button
+                type="button"
+                onclick="join()"
+                class="btn btn-primary d-inline"
+              >
+                Join Room
+              </button>
+            </div>
+          </div>
+        </div>
 
 
-
+<!---->
         <div class="container-fluid" id='username-set' hidden>
             <div class="row">
                 <div class="col-12 h4 mt-5 text-center">Your Name</div>
@@ -147,4 +187,12 @@
             </div>
         </div>
     </body>
+    <script>
+        // Room join handler function
+        const join = () => {
+          window.location.href = `/${
+            document.getElementById("roomIdInput").value
+          }`;
+        };
+      </script>
 </html>
