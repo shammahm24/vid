@@ -56,20 +56,21 @@ window.addEventListener( 'load', () => {
         //let roomName = document.querySelector( '#room-name' ).value;
         //let yourName = document.querySelector( '#your-name' ).value;
         let yourName="Host";
-        if (yourName ) {
+        let room= helpers.generateRandomString();
+        if (yourName && room ) {
             //remove error message, if any
-            document.querySelector( '#err-msg' ).innerHTML = "";
+           // document.querySelector( '#err-msg' ).innerHTML = "";
 
             //save the user's name in sessionStorage
             sessionStorage.setItem( 'username', yourName );
 
             //create room link
-            let roomLink = `${ location.origin }?${ helpers.generateRandomString() }`;
+            let roomLink = `${ location.origin }/?meet=${ room }`;
 
             //show message with link to room
             //document.querySelector( '#room-created' ).innerHTML = `Room successfully created. Click <a href='${ roomLink }'>here</a> to enter room. 
               //  Share the room link with your partners.`;
-	    window.location.href = `${roomLink}`;
+	        window.location.href = `${roomLink}`;
 
            /*
                    let name = document.querySelector( '#username' ).value;
@@ -91,8 +92,8 @@ window.addEventListener( 'load', () => {
 		*/
 
             //empty the values
-            document.querySelector( '#room-name' ).value = '';
-            document.querySelector( '#your-name' ).value = '';
+           // document.querySelector( '#room-name' ).value = '';
+            //document.querySelector( '#your-name' ).value = '';
         }
 
         else {

@@ -1,3 +1,19 @@
+
+html{
+    padding-left: 20px;
+}
+.home-panel{
+    padding-left:10%;
+    /*padding-right:10%;*/
+    padding-top:20%;
+}
+.nav-color{
+    color:#0059ff;
+}
+.vico-text{
+    color:#0059ff;
+    font-size: 950%;
+}
 .chat-col{
     right: -100vw;
     bottom: 0;
@@ -64,13 +80,14 @@
 
 .main{
     padding-top: 40px;
+    padding-left:20px;
 }
 
 
 .remote-video{
     width:100%;
     height:auto;
-    max-height: 90vh;
+    max-height: 50vh;
 }
 
 
@@ -156,7 +173,7 @@
 .record-option{
     height: 200px;
     border-radius: 10%;
-    border: 1px solid #17a2b8;
+    border: 1px solid #0059ff;
     cursor: pointer;
     padding: 10px;
     vertical-align: middle;
@@ -179,7 +196,7 @@
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #17a2b8;
+    border: 1px solid #0059ff;
     width: 80%;
 }
 
