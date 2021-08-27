@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multi-User Video Call</title>
+        <title>VICO</title>
 
         <meta content="width=device-width, initial-scale=1" name="viewport" />
 
@@ -9,14 +9,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel='stylesheet' href='assets/css/app.css' type="text/css">
 
-        <script src='/socket.io/socket.io.js'></script>
-        <script type="module" src='assets/js/rtc.js'></script>
-        <script type="module" src='assets/js/events.js'></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js" integrity="sha256-2qQheewaqnZlXJ3RJRghVUwD/3fD9HNqxh4C+zvgmF4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
-        <script src='https://cdn.rawgit.com/yahoo/xss-filters/master/dist/xss-filters.js'></script>
-        <script src='assets/js/autolink.js'></script>
+        <!--<script type="module"  src='assets/js/main.js'></script>-->
     </head>
 
     <body>
@@ -40,8 +33,8 @@
         </div>
         
         
-        <nav class="navbar fixed-top bg-info rounded-0 d-print-none">
-            <div class="text-white">Video Call</div>
+        <nav class="navbar fixed-top bg-dark rounded-0 d-print-none">
+            <div class="text-white">VICO</div>
 
             <div class="pull-right room-comm" hidden>
                 <button class="btn btn-sm rounded-0 btn-no-effect" id='toggle-video' title="Hide Video">
@@ -79,17 +72,17 @@
                 <div class="col-12 text-center">
                     <span class="form-text small text-danger" id='err-msg'></span>
                 </div>
-
+                <div hidden>
                 <div class="col-12 col-md-4 offset-md-4 mb-3">
                     <label for="room-name">Room Name</label>
-                    <input type="text" id='room-name' class="form-control rounded-0" placeholder="Room Name">
+                    <input type="text" id='room-name' class="form-control rounded-0" placeholder="Room Name" value="1">
                 </div>
 
                 <div class="col-12 col-md-4 offset-md-4 mb-3">
                     <label for="your-name">Your Name</label>
-                    <input type="text" id='your-name' class="form-control rounded-0" placeholder="Your Name">
+                    <input type="text" id='your-name' class="form-control rounded-0" placeholder="Your Name" value="Host">
                 </div>
-
+            </div>
                 <div class="col-12 col-md-4 offset-md-4 mb-3">
                     <button id='create-room' class="btn btn-block rounded-0 btn-info">Create Room</button>
                 </div>
@@ -126,14 +119,34 @@
         <div class="container-fluid room-comm" hidden>
             <div class="row">
                 <video class="local-video mirror-mode" id='local' volume='0' autoplay muted></video>
+                
+                <div class="transcript-container">
+                    
+                    <textarea id="transcript" placeholder="Start speaking" cols="100" rows="8" readonly="readonly"></textarea>
+                    <!-- Buttons for controlling the text area-->
+            <div class="col">
+                <button  id="print-pdf" class="button-xl" title="Print Transcription">Save</button>
+                <button id="stop-button" class="button-xl" title="Stop Transcription" disabled="true"><i
+                        class="fa fa-stop-circle"></i> Stop
+                </button>
+                <button id="reset-button" class="button-xl button-secondary" title="Clear Transcript"> 
+                    Clear Transcript
+                </button>
+            </div>
+
+            <!-- Buttons for controlling the text area-->
+                </div>
             </div>
             
+
             <div class="row">
                 <div class="col-md-12 main" id='main-section'>                    
                     <div class="row mt-2 mb-2" id='videos'></div>
+                
+                    
                 </div>
 
-                <div class="col-md-3 chat-col d-print-none mb-2 bg-info" id='chat-pane' hidden>
+                <div class="col-md-3 chat-col d-print-none mb-2 bg-dark" id='chat-pane' hidden><!--hide-->
                     <div class="row">
                         <div class="col-12 text-center h2 mb-3">CHAT</div>
                     </div>
@@ -146,5 +159,73 @@
                 </div>
             </div>
         </div>
+        <div hidden>
+            <div class="row">
+                <div class="col">
+                    <label>Access ID:</label>
+                    <input type="password" id="access_id" placeholder="ACCESS ID" value="AKIARBCUX7XJL344CM4R" />
+    
+                    <label>Secret Key:</label>
+                    <input type="password" id="secret_key" placeholder="SECRET KEY" value="WTiUeMG3/rg5B7kIUc2M3yPp10dnAf1R0YrTKC9N" />
+                    <label>Session Token (if using MFA):</label>
+                    <input type="password" id="session_token" placeholder="SESSION TOKEN" value="" />
+                </div>
+                <div class="col">
+                    <label>Language: </label>
+                    <select id="language">
+                        <optgroup label="English">
+                            <option selected="selected" value="en-US">US English (en-US)</option>
+                            <option value="en-AU">Australian English (en-AU)</option>
+                            <option value="en-GB">British English (en-GB)</option>
+                        </optgroup>
+                        <optgroup label="French">
+                            <option value="fr-CA">Canadian French (fr-CA)</option>
+                            <option value="fr-FR">French (fr-FR)</option>
+                        </optgroup>
+                        <optgroup label="Spanish">
+                            <option value="es-US">US Spanish (es-US)</option>
+                        </optgroup>
+                    </select>
+    
+                    <label>Region:</label>
+                    <select id="region">
+                        <option value="us-east-1">US East (N. Virginia)</option>
+                        <option selected="selected" value="us-east-2">US East (Ohio)</option>
+                        <option value="us-west-2">US West (Oregon)</option>
+                        <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+                        <option value="ca-central-1">Canada (Central)</option>
+                        <option value="eu-west-1">EU (Ireland)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </body>
+
+    <script src='/socket.io/socket.io.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js" integrity="sha256-2qQheewaqnZlXJ3RJRghVUwD/3fD9HNqxh4C+zvgmF4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
+    <script src='https://cdn.rawgit.com/yahoo/xss-filters/master/dist/xss-filters.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script type="module" src='assets/js/rtc.js'></script>
+    <script type="module" src='assets/js/events.js'></script>
+    <script src='assets/js/autolink.js'></script>
+    <script type="module" src='assets/js/bundle.js'></script>
+    <script>
+        var currentdate = new Date(); 
+        var datetime = " on " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+        var doc= new jsPDF();
+          $('#print-pdf').click(function () {
+            doc.text($('#transcript').val(), 10, 10);
+            doc.save('Vico-Notes'+datetime+'.pdf'); 
+          });
+         </script>
+
 </html>

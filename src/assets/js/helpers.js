@@ -110,17 +110,16 @@ export default {
     getIceServer() {
         return {
             iceServers: [
-                {
-                    urls: ["stun:eu-turn4.xirsys.com"]
-                },
-                {
-                    username: "ml0jh0qMKZKd9P_9C0UIBY2G0nSQMCFBUXGlk6IXDJf8G2uiCymg9WwbEJTMwVeiAAAAAF2__hNSaW5vbGVl",
-                    credential: "4dd454a6-feee-11e9-b185-6adcafebbb45",
-                    urls: [
-                        "turn:eu-turn4.xirsys.com:80?transport=udp",
-                        "turn:eu-turn4.xirsys.com:3478?transport=tcp"
-                    ]
-                }
+               {'url':'turn,18.220.242.183:3478',
+		'username':'vico',
+                'credential':'20210624',
+                 'urls':'turn:18.220.242.183:3478'},
+               
+               {'url': 'stun:global.stun.twilio.com:3478?transport=udp', 'urls': 'stun:global.stun.twilio.com:3478?transport=udp'},
+		{'url': 'turn:global.turn.twilio.com:3478?transport=udp',
+		 'username': '4864f86e6884b444cdca7d0295235c2b050a52e80c1bdfba5a316f6123d1359f',
+		 'urls': 'turn:global.turn.twilio.com:3478?transport=udp',
+		 'credential': 'Y2M4iDkj+zYDWyTovifJIhdWWDOGJb//4N88W3iCsIg='}
             ]
         };
     },
@@ -130,12 +129,12 @@ export default {
         let chatMsgDiv = document.querySelector( '#chat-messages' );
         let contentAlign = 'justify-content-end';
         let senderName = 'You';
-        let msgBg = 'bg-white';
+        let msgBg = 'bg-primary';
 
         if ( senderType === 'remote' ) {
             contentAlign = 'justify-content-start';
             senderName = data.sender;
-            msgBg = '';
+            msgBg = 'bg-info';
 
             this.toggleChatNotificationBadge();
         }
